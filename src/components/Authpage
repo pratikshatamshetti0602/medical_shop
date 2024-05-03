@@ -1,0 +1,114 @@
+import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
+
+// Import your company logo image
+import companyLogo from './company_logo.png';
+
+const Login = ({ onLogin }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    // Here you can perform login logic, like sending a request to your backend
+    // For simplicity, I'm just logging the username and password
+    console.log('Username:', username);
+    console.log('Password:', password);
+
+    // After successful login, you can trigger a callback to the parent component
+    onLogin();
+  };
+
+  return (
+    <div>
+      <img src={companyLogo} alt="Company Logo" style={{ display: 'block', margin: 'auto' }} />
+      <h2>Login</h2>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={handleLogin}>Login</button>
+      <div>
+        <FontAwesomeIcon icon={faGoogle} /> {/* Google login icon */}
+        <FontAwesomeIcon icon={faFacebook} /> {/* Facebook login icon */}
+      </div>
+    </div>
+  );
+};
+
+const SignUp = ({ onSignUp }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSignUp = () => {
+    // Here you can perform signup logic, like sending a request to your backend
+    // For simplicity, I'm just logging the username and password
+    console.log('Username:', username);
+    console.log('Password:', password);
+
+    // After successful signup, you can trigger a callback to the parent component
+    onSignUp();
+  };
+
+  return (
+    <div>
+      <img src={companyLogo} alt="Company Logo" style={{ display: 'block', margin: 'auto' }} />
+      <h2>Sign Up</h2>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={handleSignUp}>Sign Up</button>
+      <div>
+        <FontAwesomeIcon icon={faGoogle} /> {/* Google sign up icon */}
+        <FontAwesomeIcon icon={faFacebook} /> {/* Facebook sign up icon */}
+      </div>
+    </div>
+  );
+};
+
+const AuthPage = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+
+  const handleSignUp = () => {
+    // You might want to implement logic here to handle successful sign up
+    // For this basic example, we'll just log the sign up and set the user as logged in
+    console.log('User signed up successfully!');
+    setLoggedIn(true);
+  };
+
+  return (
+    <div>
+      {loggedIn ? (
+        <h1>Welcome User!</h1>
+      ) : (
+        <div>
+          <Login onLogin={handleLogin} />
+          <SignUp onSignUp={handleSignUp} />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AuthPage;
